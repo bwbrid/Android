@@ -5,8 +5,10 @@
     android:versionName="1.0" >
 
     <uses-sdk
-        android:minSdkVersion="14"
+        android:minSdkVersion="10"
         android:targetSdkVersion="21" />
+
+    <uses-permission android:name="android.permission.PROCESS_OUTGOING_CALLS" />
 
     <application
         android:allowBackup="true"
@@ -22,6 +24,24 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name="com.bwbrid.day01.IpPhoneCallActivity" >
+        </activity>
+        <activity android:name="com.bwbrid.day01.SdCardStatusActivity" >
+        </activity>
+
+        <receiver android:name="com.bwbrid.day01.OutGoingCallReceiver" >
+            <intent-filter>
+                <action android:name="android.intent.action.NEW_OUTGOING_CALL" />
+            </intent-filter>
+        </receiver>
+        <receiver android:name="com.bwbrid.day01.SdCardReceiver" >
+            <intent-filter>
+                <action android:name="android.intent.action.MEDIA_MOUNTED" />
+                <action android:name="android.intent.action.MEDIA_UNMOUNTED" />
+                <!-- MEDIA_UNMOUNTED/MEDIA_MOUNTED 的广播需要添加 scheme="file" -->
+                <data android:scheme="file" />
+            </intent-filter>
+        </receiver>
     </application>
 
 </manifest>
